@@ -2,36 +2,15 @@ import { useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useJoinUser } from "../../hooks/User_query";
+import joinCondition, { initState } from "../../reducer/joinCondition";
 import Button from "../common/Button";
 import Confirm from "../common/ConfirmModal";
 
 export default function JoinUser() {
-  const initState = { 
-    email: '', 
-    emailState: '',
-    password: '',
-    passwordState: ''
-  } 
-  const joinCondition = (
-    state: typeof initState , 
-    action: {type: string, value: string}): typeof initState => {
-      switch(action.type) {
-        case 'email':
-          return vaildateEmail(action.value) ?
-                { ...state, email: action.value, emailState: ''} :
-                { ...state, emailState: '올바른 이메일 형식이 아닙니다(ex: abc@todo.com)'}
-        case 'password':
-          return vaildatePassword(action.value) ?
-                { ...state, password: action.value, passwordState: ''} :
-                { ...state, passwordState: '8자리 이상 입력해주세요'} 
-        default:
-          return state
-      }
-  } 
-
   const [ confirmModal, setConfirmModal ] = useState(false)  
-  const [ state, dispatch ] = useReducer(joinCondition, initState )
+  const [ state, dispatch ] = useReducer(joinCondition, initState)
   const { email, password, emailState, passwordState } = state
+
   const joinMutation = useJoinUser({email, password})
   const nav = useNavigate()
 
@@ -105,16 +84,6 @@ export default function JoinUser() {
   )
 }
 
-function vaildateEmail(email: string) {
-  const emailCondition = 
-  /^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
-       
-  return emailCondition.test(email)
-}
-
-function vaildatePassword(password: string) {
-  return password.length >= 8
-}
 
 
 //style
