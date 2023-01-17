@@ -11,7 +11,7 @@
  <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/76c215161413651.63c651fe055e3.gif" width="600px"/>
  
  ### 회원가입
- <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/76c215161413651.63c651fe055e3.gif" width="600px"/>
+ <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/bd62a5161413651.63c651fe037fc.gif" width="600px"/>
  
  ### todo CRUD
  <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/7755ff161413651.63c651fe07a12.gif" width="600px"/>
