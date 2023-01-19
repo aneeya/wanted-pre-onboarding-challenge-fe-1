@@ -1,29 +1,25 @@
 import { useState } from "react"
-import { useParams } from "react-router-dom"
 import styled from "styled-components"
 import Button from "../../components/common/Button"
 import NoticeMesseage from "../../components/common/NoticeMesseage"
 import UpdateTodo from "../../components/form/UpdateTodo"
 import TodoItemDetail from "../../components/layout/todo/TodoItemDetail"
-import { useGetTodoList } from "../../hooks/Todo_query"
-import { Todo } from "../../types/todolistType"
+import { useGetTodoItem } from "../../hooks/Todo_query"
 
 export default function TodoListDetailPage() {
   const [ editMode, setEditMode ] = useState(false)
-  const paramId = useParams().id
-  const { data } = useGetTodoList()
+  const selectedTodo = useGetTodoItem()
 
-  const selectedTodo = (data.data as Todo[]).find( (cachedTodo: Todo) => cachedTodo.id === paramId) 
-  
-  if(selectedTodo === undefined) {
+  if( selectedTodo === undefined) {
     return <NoticeMesseage text="해당 목록이 존재하지 않습니다" />
   }
+
   return(
     <>
       { !editMode 
         ?
         <S.Layout>
-          <TodoItemDetail todo={selectedTodo!} />
+          <TodoItemDetail todo={selectedTodo} />
           <Button 
             styler="noborder" 
             text="edit" 
@@ -32,7 +28,7 @@ export default function TodoListDetailPage() {
             onClick={() => setEditMode(true)}/>
         </S.Layout>
         :
-        <UpdateTodo closeAction={() => setEditMode(false)} todo={selectedTodo!} />
+        <UpdateTodo closeAction={() => setEditMode(false)} todo={selectedTodo} />
       }
     </>
   )
