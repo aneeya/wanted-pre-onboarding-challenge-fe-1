@@ -1,38 +1,31 @@
-import React, { useState } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
+import useConfirmModal from "../../../hooks/Confirm_modal"
 import { useDeleteTodo } from "../../../hooks/Todo_query"
-import Portal from "../../../Portal"
 import { TodoProps } from "../../../types/todolistType"
 import Button from "../../common/Button"
-import Confirm from "../../common/ConfirmModal"
 
 
 export default React.memo(function TodoItem({todo}: TodoProps) {
-  const [ confirmModal, setComfirmModal] = useState(false)
+  const [ setConfirm, toggleConfirm ] = useConfirmModal({
+    text: "정말 삭제 하시겠습니까?",
+    ok: deleteTodo
+  })
 
   const { title, createdAt, updatedAt, id} = todo
   const deleteMutation = useDeleteTodo(id)
   console.log('todo')
 
-  const deleteTodo = () => {
+  function deleteTodo() {
     deleteMutation.mutate()
   }
 
-  const confirmAction = {
-    ok: deleteTodo,
-    cancel: () => setComfirmModal(false)
-  }
+  
 
   return(
     <>
-      <Portal>
-        {confirmModal && 
-          <Confirm 
-            text="정말 삭제 하시겠습니까?" 
-            ok={confirmAction.ok} 
-            cancel={confirmAction.cancel}/>}
-      </Portal>
+      {setConfirm}
 
       <S.Li>
         <S.ButtonLayout>
@@ -44,7 +37,7 @@ export default React.memo(function TodoItem({todo}: TodoProps) {
               width: "8rem",
               height: "4rem"
             }}
-            onClick={() => setComfirmModal(true)}/>
+            onClick={toggleConfirm as () => void}/>
         </S.ButtonLayout>
           <Link to={id}>
             <S.Link>

@@ -1,34 +1,19 @@
-import { useState } from "react";
 import styled from "styled-components";
-import Portal from "../../../Portal";
+import useConfirmModal from "../../../hooks/Confirm_modal";
 import imgIcon from "../../../styles/imgSource";
 import Button from "../../common/Button";
-import Confirm from "../../common/ConfirmModal";
 
 export default function HeaderLogined() {
-  const [ logoutModal, setLogoutModal ] = useState(false)
+  const [ setConfirm, toggleConfirm ] = useConfirmModal({text: "로그아웃하시겠습니까?", ok: clickLogout})
 
-  const clickLogout = () => {
+  function clickLogout() {
     window.localStorage.removeItem('token')
     window.location.replace('/')
   }
 
-  const confirmAction = {
-    ok: clickLogout,
-    cancel: () => setLogoutModal(false)
-  }
-
   return(
     <>
-      {
-        logoutModal && 
-          <Portal>
-            <Confirm 
-              text="로그아웃하시겠습니까?" 
-              ok={confirmAction.ok} 
-              cancel={confirmAction.cancel}/>
-          </Portal>
-      }
+      {setConfirm}
       <S.Layout>
         <S.IconLayout>
           <S.LoginIcon alt="로그인됨" src={imgIcon.login}/>
@@ -39,7 +24,7 @@ export default function HeaderLogined() {
           type="button"
           text="로그아웃"
           size={{width: '8rem', height: '4rem'}}
-          onClick={() => setLogoutModal(true)}/>
+          onClick={toggleConfirm as () => void}/>
       </S.Layout>
     </>
   )

@@ -7,3 +7,7 @@ export interface BTCustom {
   disabled?: boolean
   color?: "ok" 
 }
+
+export interface HiddenBTCustom {
+  type: "button" | "reset" | "submit"
+}

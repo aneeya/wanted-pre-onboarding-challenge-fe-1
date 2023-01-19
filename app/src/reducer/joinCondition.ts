@@ -1,24 +1,25 @@
+import { Join } from "../types/userManageType"
 import { vaildateEmail, vaildatePassword } from "../validatation/joinvaildate"
 
 export const initState = { 
   email: '', 
-  emailState: '',
+  emailValidation: '',
   password: '',
-  passwordState: ''
+  passwordValidation: ''
 } 
 
  const joinCondition = ( 
-  state: typeof initState, 
-  action: {type: string, value: string}): typeof initState => {
+  state: Join, 
+  action: {type: string, value: string}): Join => {
     switch(action.type) {
       case 'email':
         return vaildateEmail(action.value) ?
-              { ...state, email: action.value, emailState: ''} :
-              { ...state, emailState: '올바른 이메일 형식이 아닙니다(ex: abc@todo.com)'}
+              { ...state, email: action.value, emailValidation: ''} :
+              { ...state, emailValidation: '올바른 이메일 형식이 아닙니다(ex: abc@todo.com)'}
       case 'password':
         return vaildatePassword(action.value) ?
-              { ...state, password: action.value, passwordState: ''} :
-              { ...state, passwordState: '8자리 이상 입력해주세요'} 
+              { ...state, password: action.value, passwordValidation: ''} :
+              { ...state, passwordValidation: '8자리 이상 입력해주세요'} 
       default:
         return state
     }
