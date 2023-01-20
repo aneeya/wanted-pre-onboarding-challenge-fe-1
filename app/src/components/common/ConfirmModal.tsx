@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import imgIcon from "../../styles/imgSource"
+import { cancelButton, joinButton } from "../../styles/styleProps"
 import Button from "./Button"
 
 interface Prop {
@@ -9,6 +10,17 @@ interface Prop {
 }
 
 export default function Confirm({text, ok, cancel}: Prop) {
+  const joinButtonStyle = { ...joinButton,
+    text: 'yes',
+    onClick: ok,
+    size: 'small'
+  }
+
+  const cancelButtonStyle = { ...cancelButton,
+    onClick: cancel,
+    size: 'small'
+  } 
+
   return(
     <>
       <S.Background>
@@ -18,8 +30,8 @@ export default function Confirm({text, ok, cancel}: Prop) {
             {text}
           </S.ConfirmContent>
           <S.Buttons>
-            <Button type="button" text="확인" size={{width: '8rem', height: '4rem'}} onClick={ok} />
-            <Button type="button" text="취소" size={{width: '8rem', height: '4rem'}} onClick={cancel} />
+            <Button {...joinButtonStyle} />
+            <Button {...cancelButtonStyle} />
           </S.Buttons>
         </S.Layout>
       </S.Background>

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import useConfirmModal from "../../../hooks/Confirm_modal";
 import imgIcon from "../../../styles/imgSource";
+import { longinMove } from "../../../styles/styleAnimation";
+import { loginStateButton } from "../../../styles/styleProps";
 import Button from "../../common/Button";
 
 export default function HeaderLogined() {
@@ -11,20 +13,17 @@ export default function HeaderLogined() {
     window.location.replace('/')
   }
 
+  const buttonStyle = { ...loginStateButton, 
+    onClick:  toggleConfirm as () => void}
+
   return(
     <>
       {setConfirm}
       <S.Layout>
         <S.IconLayout>
-          <S.LoginIcon alt="로그인됨" src={imgIcon.login}/>
-          logined
+          <S.LoginIcon />
         </S.IconLayout>
-        <Button
-          styler="loginstate"
-          type="button"
-          text="로그아웃"
-          size={{width: '8rem', height: '4rem'}}
-          onClick={toggleConfirm as () => void}/>
+        <Button { ...buttonStyle }/>
       </S.Layout>
     </>
   )
@@ -40,16 +39,24 @@ S.Layout = styled.div`
 `
 S.IconLayout = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: start;
   width: 10rem;
-  heith: 5rem;
+  height: 5rem;
+  margin-right:1rem;
+  border-radius: 25% / 50%;
+  border: 2px solid var(--color-purple3);
   font-size: 1.4rem;
   font-weight: 600;
   color: var(--color-blue);
 `
 
-S.LoginIcon = styled.img`
-  width: 2.5rem;
+S.LoginIcon = styled.div`
+  width: 4rem;
+  height: 4rem;
+  margin-left: 0.3rem;
+  border-radius: 50%;
+  background: url(${imgIcon.smile}) center / 2rem no-repeat;
+  background-color: var(--color-red-orange);
+  animation: ${longinMove} 0.6s 0.1s alternate-reverse ease;
 `

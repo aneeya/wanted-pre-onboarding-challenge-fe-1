@@ -14,7 +14,7 @@ export default function MainPageHeader() {
         <S.HeadLayout>
           <h1>
             <Link to={'/'}>
-              <S.HomeIcon alt="홈으로가기" src={imgIcon.main}/>
+              <S.HomeIcon alt="홈으로가기" src={imgIcon.homeIcon}/>
             </Link>
           </h1>
           { storedToken  !== null ?
@@ -40,8 +40,9 @@ S.Header = styled.header`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 10rem;
-  background: var(--color-white);
+  height: 15rem;
+  background: var(--color-purple0);
+  border-bottom: 1px solid var(--color-gray-purple1);
 `
 
 S.HeadLayout = styled.div`
@@ -53,5 +54,5 @@ S.HeadLayout = styled.div`
 `
 
 S.HomeIcon = styled.img`
-  width: 12rem;
+  width: 6rem;
 `

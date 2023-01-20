@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import LoginUser from "../../components/form/LoginUser";
+import AuthLayout from "../../components/layout/user/AuthLayout";
 
 export default function LoginPage() {
   const storedToken = window.localStorage.getItem('token')
@@ -8,40 +8,9 @@ export default function LoginPage() {
     <>
       { storedToken === null 
         &&
-        <S.Main>
-          <S.Layout>
-            <S.H2>로그인</S.H2>
-            <LoginUser/>
-          </S.Layout>
-        </S.Main> 
+        <AuthLayout title={'로그인'} element={<LoginUser/>} /> 
       }
     </>
   ) 
 }
 
-//style
-
-const S: any = {}
-
-S.Main = styled.main`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100vh;
-`
-
-S.Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 45rem;
-  height: 45rem;
-`
-
-S.H2 = styled.h2`
-  margin-top: 5rem;
-  margin-bottom: 3rem;
-  font-size: 2rem;
-  font-weight: 800;
-`

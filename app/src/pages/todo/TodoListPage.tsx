@@ -34,22 +34,21 @@ S.Main = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 15rem;
+  padding-top: 25rem;
 `
 
 S.Layout = styled.div`
   position: relative;
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
-  width: 108rem;
+  width: 124rem;
   &::before {
     content: '';
     position: absolute;
-    top: 3%;
+    top: -20%;
     left: 64%;
     width: 0.2rem;
-    height: 70rem;
+    height: 80rem;
     background: var(--color-gray);
   } 
 `

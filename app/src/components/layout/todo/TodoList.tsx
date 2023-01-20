@@ -7,8 +7,6 @@ import TodoItem from "./TodoItem";
 
 
 export default React.memo(function TodoList({todos}: TodosProps) {
-  // const getTodos = useGetTodoCacheData('@todos')//캐싱 데이터로 렌더링하면 즉가적으로 변경할 수 없음
-  console.log('todos')
 
   const todoItems = () => {
     return todos!.length === 0 ?
@@ -20,8 +18,7 @@ export default React.memo(function TodoList({todos}: TodosProps) {
     <>
       <S.Layout>
        <RegisterTodo/>
-        
-        <S.Ul>{todoItems()}</S.Ul>
+       <S.Ul>{todoItems()}</S.Ul>
       </S.Layout>
     </>
   )
@@ -35,6 +32,7 @@ const S: any = {};
 S.Layout = styled.div`
   display: flex;
   align-items: flex-start;
+  margin-right: 10rem;
 `
 
 S.Ul = styled.ul`

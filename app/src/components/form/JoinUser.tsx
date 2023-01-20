@@ -4,12 +4,15 @@ import styled from "styled-components";
 import useConfirmModal from "../../hooks/Confirm_modal";
 import { useJoinUser } from "../../hooks/User_query";
 import joinCondition, { initState } from "../../reducer/joinCondition";
+import { cancelButton, joinButton } from "../../styles/styleProps";
 import { joinButtonActive } from "../../validatation/joinvaildate";
 import Button from "../common/Button"; 
 import HiddenButton from "../common/HiddenButton";
 
 export default function JoinUser() {
-  const [ setConfirm, toggleConfirm ] = useConfirmModal({text: "회원가입을 완료 하시겠습니까?", ok: confirmUserInfo}) 
+  const [ setConfirm, toggleConfirm ] = useConfirmModal({
+    text: "회원가입을 완료 하시겠습니까?",
+    ok: confirmUserInfo}) 
   const [ state, dispatch ] = useReducer(joinCondition, initState)
   const { email, password, emailValidation, passwordValidation } = state
 
@@ -24,13 +27,23 @@ export default function JoinUser() {
   }
   
   function confirmUserInfo() {
-    const submitButton = document.querySelector('#joinUser-submit') as HTMLButtonElement
-    submitButton.click() 
+    console.log('hi')
+    const hiddenButton = buttonRef.current! as HTMLButtonElement
+    hiddenButton.click()
   }
   
   const submitUserInfo = (e: SubmitEvent) => {
     e.preventDefault()
     joinMutation.mutate()
+  }
+
+  const joinButtonStyle = { ...joinButton,
+    disabled: joinButtonActive(state),
+    onClick: toggleConfirm as () => void
+  }
+
+  const cancelButtonStyle = { ...cancelButton,
+    onClick: () => nav('/')
   }
   
   return (
@@ -46,6 +59,7 @@ export default function JoinUser() {
             placeholder="todo@todo.com"
             onChange={changeUserInfo}
             requried
+            color={emailValidation}
             />
           <S.ValidateState >{emailValidation}</S.ValidateState>
         </S.InputLayout>
@@ -58,23 +72,14 @@ export default function JoinUser() {
             placeholder="8자리이상 입력해주세요"
             onChange={changeUserInfo}
             requried
+            color={passwordValidation}
             />
           <S.ValidateState >{passwordValidation}</S.ValidateState>
         </S.InputLayout>
         <S.Buttons>
-          <Button
-            text="가입"
-            type="button"
-            size={{width: '8rem', height: '4rem'}}
-            disabled={joinButtonActive(state)}
-            onClick={toggleConfirm as () => void}
-            color="ok" />
-          <Button
-            text="취소"
-            type="button"
-            size={{width: '8rem', height: '4rem'}}
-            onClick={() => nav('/')}/>
-          <HiddenButton type="submit" ref={buttonRef} />
+          <Button {...joinButtonStyle}/>
+          <Button {...cancelButtonStyle}/>
+          <HiddenButton a="hidden" ref={buttonRef} />
         </S.Buttons>
       </S.Form>
     </>
@@ -97,30 +102,40 @@ S.Form = styled.form`
 S.InputLayout = styled.div`
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
   width: 30rem;
-  height: 5rem;
+  height: 10rem;
 `
 
 S.Label = styled.label`
   font-size: 1.6rem;
   font-weight: 600;
+  margin-bottom: 1rem;
 `
 S.Input = styled.input`
-  width: 22rem;
-  height: 3.8rem;
-  border-radius: 1.2rem;
+  width: 30rem;
+  height: 5rem;
+  border-radius: 0.5rem;
+  border: 2px solid ${(prop) => {
+    return prop.color === '' ? 
+           'var(--color-gray-purple0)' : 
+           'var(--color-red-orange)'
+  }};
   padding: 1rem;
   font-size: 1.4rem;
 `
 S.ValidateState = styled.span`
   position: absolute;
-  bottom: 20%;
-  right: -19rem;
+  top: -9%;
+  left: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
   width: 18rem;
+  height: 3rem;
   font-size: 1.2rem;
-  color: var(--color-red);
+  color: var(--color-red-orange);
 `
 
 S.Buttons = styled.div`
@@ -128,7 +143,7 @@ S.Buttons = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  width: 18rem;
+  width: 32rem;
   height: 5rem;
   margin-top: 4rem;
 `

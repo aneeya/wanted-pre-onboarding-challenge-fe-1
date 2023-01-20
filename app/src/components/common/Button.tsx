@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { backgroundColor, fontColor } from "../../styles/styleUtils";
+import { buttonHeight, buttonWidth, fontColor, hoverColor } from "../../styles/styleUtils";
 import { BTCustom } from "../../types/buttonCustom";
 
 export default function Button(props: BTCustom) {
@@ -9,24 +9,21 @@ export default function Button(props: BTCustom) {
     case 'noborder':
       return <BT.St2
               type={type} 
-              style={size}
               disabled={disabled}
               color={color}
               onClick={onClick}>{text}</BT.St2>
     case 'loginstate' :
       return <BT.LoginState
-              type={type} 
-              style={size}
-              disabled={disabled}
-              color={color}
+              type={type}
+              color={color} 
               onClick={onClick}>{text}</BT.LoginState>
     default:
-      return <BT.St1
+      return <BT.Default
               type={type} 
-              style={size}
               disabled={disabled}
               color={color}
-              onClick={onClick}>{text}</BT.St1>
+              theme={size}
+              onClick={onClick}>{text}</BT.Default>
   }
   
 }
@@ -35,22 +32,36 @@ export default function Button(props: BTCustom) {
 const BT: any = {};
 
 
-BT.St1 = styled.button`
-  background: ${(prop) => backgroundColor(prop.color!)}
-  border: none;
-  border-radius: 3rem;
+BT.Default = styled.button`
+  width: ${(prop) => buttonWidth(prop.theme)};
+  height: ${(prop) => buttonHeight(prop.theme)};
+  background: ${(prop) => prop.color!};
+  border: ${(prop) => {
+    return prop.color === 'var(--color-purple2)' 
+           ? 'none' 
+           : '2px solid var(--color-purple2)'
+  }};
   cursor: pointer;
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: ${(prop) => fontColor(prop.color!)}
+  font-size: 1.6rem;
+  font-weight: 800; 
+  color: ${(prop) => fontColor(prop.color!)};
   &:hover,
   &:focus {
-    color: var(--color-red);
-    border: 2px solid var(--color-red);
-    background: var(--color-black);
+    border: 1px solid ${(prop) => hoverColor(prop.color!)};
+    box-shadow: 3px 3px inset ${(prop) => hoverColor(prop.color!)};
+  }
+  &:disabled {
+    &:hover,
+    &:focus {
+      border: 2px solid var(--color-red-orange);
+      box-shadow: none;
+      cursor: not-allowed;
+    }
   }
 `
-BT.St2 = styled(BT.St1)`
+
+
+BT.St2 = styled(BT.Default)`
   background: none;
   font-size: 1.4rem;
   color: var(--color-blue);
@@ -62,13 +73,24 @@ BT.St2 = styled(BT.St1)`
   }
 `
 
-BT.LoginState = styled(BT.St1)`
-  background: var(--color-black);
-  color: var(--color-white);
+BT.LoginState = styled.button`
+  width: 7rem;
+  height: 4rem;
+  background: ${(prop) => prop.color!};
+  color: var(--color-purple3);
   border-radius: 2rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-family: var(--font-english);
+  font-weight: 700;
   &:hover,
   &:focus {
-    color: var(--color-blue);
-    border: 2px solid var(--color-blue);
+    background: ${(prop) => {
+        return prop.color === 'var(--color-yellow)' ? 
+        'var(--color-orange)' :
+        'var(--color-gray-purple1)'
+      }
+    }};
   }
 `

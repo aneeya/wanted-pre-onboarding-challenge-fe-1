@@ -1,18 +1,17 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import imgIcon from "../../../styles/imgSource";
+import { gotojoinText } from "../../../styles/styleAnimation";
 
 export default function MainLogout() {
   return(
-    <S.Layout>
-      <S.H2>
-        회원가입 하러 가기
-        <S.Icon alt="회원가입아이콘" src={imgIcon.gojoin} />
-      </S.H2>
-      <S.Link>
-        <Link to={'/join'}>회원가입</Link>
-      </S.Link>
-    </S.Layout>
+    <>  
+        <S.Text>
+          Go to Join 👇
+        </S.Text>
+        <S.Link>
+          <Link to={'/join'}>회원가입</Link>
+        </S.Link>
+    </>
   )
 }
 
@@ -20,41 +19,28 @@ export default function MainLogout() {
 
 const S: any = {}
 
-S.Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 30rem;
-  height: 18rem;
-`
-
-S.H2 = styled.h2`
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: space-between;
-height: 9rem;
-font-size: 2.4rem;
-font-weight: 800;
-color: var(--color-dpblue);
-`
-
-S.Icon = styled.img`
-width: 4rem;
+S.Text = styled.div`
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+  font-family: var(--font-english);
+  font-weight: 800;
+  line-height: 1.5;
+  color: var(--color-purple2);
+  animation: ${gotojoinText} 0.8s 8 alternate ease-in;
 `
 
 S.Link = styled.div`
-width: 12rem;
-height: 5rem;
-border-radius: 2.6rem;
-background: var(--color-black);
-font-size: 1.8rem;
+width: 16rem;
+height: 6rem;
+border-radius: 12% / 30%;
+margin-left: 1rem;
+background: var(--color-green0);
+font-size: 2rem;
 font-weight: 800;
+font-family: var(--font-korea);
 color: var(--color-white);
 &:hover,
 &:focus {
-  border: 1px solid var(--color-blue);
-  color: var(--color-blue);
+  background: var(--color-green1);
 }
 `

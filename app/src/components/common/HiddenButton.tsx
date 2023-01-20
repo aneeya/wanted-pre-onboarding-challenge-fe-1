@@ -1,9 +1,9 @@
 import { forwardRef } from "react"
 import styled from "styled-components"
-import { HiddenBTCustom } from "../../types/buttonCustom"
 
-const HiddenButton = forwardRef( (prop: HiddenBTCustom, ref: React.ForwardedRef<HTMLButtonElement>) => {
-  return <Button type={prop.type} ref={ref}></Button>
+const HiddenButton = forwardRef( (prop: {a: 'hidden'},
+ref: React.ForwardedRef<HTMLButtonElement>) => {
+  return <Button type="submit" ref={ref}>{prop.a}</Button>
 })
 
 //style

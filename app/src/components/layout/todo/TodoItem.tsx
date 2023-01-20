@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import useConfirmModal from "../../../hooks/Confirm_modal"
 import { useDeleteTodo } from "../../../hooks/Todo_query"
+import imgIcon from "../../../styles/imgSource"
 import { TodoProps } from "../../../types/todolistType"
-import Button from "../../common/Button"
 
 
 export default React.memo(function TodoItem({todo}: TodoProps) {
@@ -13,7 +13,7 @@ export default React.memo(function TodoItem({todo}: TodoProps) {
     ok: deleteTodo
   })
 
-  const { title, createdAt, updatedAt, id} = todo
+  const { title, id} = todo
   const deleteMutation = useDeleteTodo(id)
   console.log('todo')
 
@@ -28,30 +28,13 @@ export default React.memo(function TodoItem({todo}: TodoProps) {
       {setConfirm}
 
       <S.Li>
-        <S.ButtonLayout>
-          <Button
-            styler="noborder"
-            text="삭제"
-            type="button"
-            size={{
-              width: "8rem",
-              height: "4rem"
-            }}
-            onClick={toggleConfirm as () => void}/>
-        </S.ButtonLayout>
+        <S.Dot></S.Dot>
+          <S.Button type='button' onClick={toggleConfirm}>
+            <S.DeleteIcon src={imgIcon.deleteIcon} alt="삭제하기" />
+          </S.Button>
           <Link to={id}>
             <S.Link>
               <S.H3>{title}</S.H3>
-              <div>
-                <div>
-                  <span>작성일</span>
-                  <span>{createdAt}</span>
-                </div>
-                <div>
-                  <span>업데이트</span>
-                  <span>{updatedAt}</span>
-                </div>
-              </div>
             </S.Link>
           </Link>
       </S.Li>
@@ -68,35 +51,60 @@ S.Li = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30rem;
-  height: 9rem;
-  margin-bottom: 1rem;
-  padding: 2rem 0 2rem 1rem;
-  border-radius: 2rem;
-  border: 2px solid var(--color-gray);
+  width: 32rem;
+  height: 6rem;
+  margin-bottom: 3rem;
+  border-bottom: 3px solid var(--color-purple0);
   &:hover,
   &:focus {
-    background: var(--color-gray);
+    background: var(--color-purple0);
   }
 `
-S.ButtonLayout = styled.div`
+
+S.Button = styled.button`
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: 1rem;
+  right: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    background: var(--color-purple2);
+  }
 `
+S.DeleteIcon = styled.img`
+  width: 1rem;
+`
+
 S.Link = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
   width: 100%;
   height: 100%;
+  padding-left: 4rem;
 `
 
 S.H3 = styled.h3`
-  margin-bottom: 1rem;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 600;
+  margin-right: 2rem;
+`
+
+S.Dot = styled.span`
+  position: absolute;
+  top: 40%;
+  left: 5%;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: var(--color-purple2);
 `
