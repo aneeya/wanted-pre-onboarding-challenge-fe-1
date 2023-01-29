@@ -57,5 +57,5 @@ S.LoginIcon = styled.div`
   border-radius: 50%;
   background: url(${imgIcon.smile}) center / 2rem no-repeat;
   background-color: var(--color-red-orange);
-  animation: ${longinMove} 0.6s 0.1s alternate-reverse ease;
+  animation: ${longinMove} 0.6s 0.1s reverse ease backwards;
 `

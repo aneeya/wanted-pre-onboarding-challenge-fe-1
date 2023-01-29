@@ -60,9 +60,12 @@ S.ConfirmContent = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 6rem;
+  width: 28rem;
+  height: 8rem;
   font-size: 2rem;
   font-weight: bolder;
+  white-space: pre-wrap;
+  text-align: center;
 `
 S.Icon = styled.img`
   width: 5.5rem;

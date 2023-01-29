@@ -51,5 +51,5 @@ S.LogoutIcon = styled.img`
   background: url(${imgIcon.smile}) center / 2rem no-repeat;
   background-color: var(--color-gray-purple0);
   transform: rotate(180deg);
-  animation: ${longinMove} 0.6s 0.1s alternate ease;
+  animation: ${longinMove} 0.6s 0.1s alternate ease backwards;
 `

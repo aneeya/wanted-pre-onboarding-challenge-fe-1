@@ -1,18 +1,19 @@
-import { useState } from "react"
+import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import useConfirmModal from "../../hooks/Confirm_modal"
 import { useRegisterTodo } from "../../hooks/Todo_query"
 import { ContainBT, OutlineBT } from "../../styles/buttonStyles"
+import { ConfrimCustom } from "../../types/todolistType"
 
 const init = {title: '', content: ''}
 
 export default function CreateTodo() {
   const [ todoInput, setTodoInput ] = useState(init)
-  const { setConfirm, toggleConfirm } = useConfirmModal({
-    text: "등록을 완료 하시겠습니까?",
-    ok: confirmTodoValue
-  })
+  const [ confirmType, setConfirmType ] = useState(false)
+  const { setConfirm, toggleConfirm } = useConfirmModal(confirmState())
 
+  const nav = useNavigate()
   const todoMutation = useRegisterTodo(todoInput!, toggleConfirm)
 
   const changeTodoValue = (e: React.ChangeEvent) => {
@@ -20,9 +21,28 @@ export default function CreateTodo() {
     setTodoInput({ ...todoInput!, [name]: value})
   }
    
-  function confirmTodoValue() {
-    todoMutation.mutate()
+  function confirmState(): ConfrimCustom  {
+
+    if(!confirmType) {
+      return {
+        text: '등록을 완료 하시겠습니까?',
+        ok: () => todoMutation.mutate()
+      } 
+    } else {
+      return {
+        text: '작성중인 내용이 지워집니다. 취소 하시겠습니까?',
+        ok: () => nav('/todos')
+      }
+    }
   }
+
+  const confrimCreate = (e: React.MouseEvent) => {
+    const target = e.target as HTMLButtonElement
+    if(target.innerText === '등록') setConfirmType(false)
+    else setConfirmType(true)
+    toggleConfirm()
+  }
+
 
   return(
     <>
@@ -52,8 +72,8 @@ export default function CreateTodo() {
             onChange={changeTodoValue}></S.TextArea>
         </S.TextLayout>
         <S.Buttons>
-          <ContainBT type="button" theme="small" onClick={toggleConfirm}>등록</ContainBT>
-          <OutlineBT type="reset" theme="small">리셋</OutlineBT>
+          <ContainBT type="button" theme="small" onClick={confrimCreate} className='createtodoBT'>등록</ContainBT>
+          <OutlineBT type="button" theme="small" onClick={confrimCreate} className='createtodoBT'>취소</OutlineBT>
         </S.Buttons>
       </S.Form>
     </>

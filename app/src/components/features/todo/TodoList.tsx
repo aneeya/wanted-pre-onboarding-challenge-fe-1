@@ -45,6 +45,7 @@ S.Contain = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  margin-top: 3rem;
 `
 
 S.Layout = styled.div`
@@ -56,7 +57,7 @@ S.Layout = styled.div`
   -ms-overflow-style: none;
   scrollbar-width: none;
   &::-webkit-scrollbar {
-    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+    display: none; 
     }
 `
 
@@ -71,5 +72,12 @@ S.Link = styled(ContainBT)`
   font-size: 1.4rem;
   height: 4.5rem;
   width: 12rem;
-  margin: -2rem 0 3rem 0;
+  margin: 0 0 3rem 0;
+  & a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4.5rem;
+    width: 12rem;
+  }
 `

@@ -18,3 +18,8 @@ export interface TodoProps {
 export interface TodosProps {
   todos: Todo[]
 }
+
+export interface ConfrimCustom {
+  text: string
+  ok: () => void
+}
