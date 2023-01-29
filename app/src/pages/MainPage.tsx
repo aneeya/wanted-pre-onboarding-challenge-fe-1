@@ -1,11 +1,9 @@
 import styled from "styled-components"
-import MainLogined from "../components/layout/home/MainLogined"
-import MainLogout from "../components/layout/home/MainLogout"
-import imgIcon from "../styles/imgSource"
+import MainLogined from "../components/features/main/MainLogined"
+import MainLogout from "../components/features/main/MainLogout"
+import { ReactComponent as MainImg }  from "../assets/mainpage.svg"
+import { ReactComponent as Logo }  from "../assets/logo.svg"
 
-// interface Prop {
-//   token: string | null
-// }
 
 export default function MainPage() {
   const storedToken = window.localStorage.getItem('token')
@@ -13,16 +11,21 @@ export default function MainPage() {
   return(
     <S.Main>
       <S.Layout>
-        <S.H2>
-          Todolist web
-          <S.Icon alt="회원가입아이콘" src={imgIcon.penIcon} />
-        </S.H2>
-        <S.P>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto dolorum nobis recusandae vero! Atque rerum
-          illum exercitationem deserunt blanditiis quos maiores, natus quis! Vel fugit natus itaque provident quas
-          porro!
-        </S.P>
-      { storedToken !== null ? <MainLogined /> : <MainLogout /> }
+        <S.ImgContent>
+        <MainImg width='50rem'/>
+        <span>아... 할 거 너무 많아</span>
+        </S.ImgContent>
+        <S.MainContent>
+          <h2>
+            <Logo width='30rem'/>
+          </h2>
+          <p>
+            <span>This is webpage that</span>
+            <span>helps you to manage</span>
+            <span>your plans</span>
+          </p>
+        { storedToken !== null ? <MainLogined /> : <MainLogout /> }
+        </S.MainContent>
       </S.Layout>
     </S.Main>
   )
@@ -38,18 +41,46 @@ S.Main = styled.main`
   justify-content: center;
   width: 100%;
   height: 100vh;
-  background: url(${imgIcon.mainBackground}) bottom left / contain no-repeat;
   background-color: var(--color-purple0);
 `
 
 S.Layout = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 50rem;
-  margin-left: 50rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 90rem;
+  margin-top: 8rem;
 `
-
+S.ImgContent = styled.div`
+  position: relative;
+  width: 50rem;
+  height: 34rem;
+  & > span {
+    position: absolute;
+    top: 20%;
+    right: 6.5%;
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+`
+S.MainContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 35rem;
+  height: 37rem;
+  & > p {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    height: 7rem;
+    margin: 3rem 0 5rem 1rem;
+    font-size: 2rem;
+    font-family: var(--font-english);
+    color: var(--color-purple3);
+  }
+`
 S.H2 = styled.h2`
 display: flex;
 align-items: center;

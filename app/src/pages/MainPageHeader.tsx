@@ -1,7 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import styled from "styled-components";
-import HeaderLogined from "../components/layout/home/HeaderLogined";
-import HeaderLogout from "../components/layout/home/HeaderLogout";
+import HeaderLogined from "../components/features/header/HeaderLogined";
+import HeaderLogout from "../components/features/header/HeaderLogout";
 import imgIcon from "../styles/imgSource";
 
 
@@ -55,4 +55,13 @@ S.HeadLayout = styled.div`
 
 S.HomeIcon = styled.img`
   width: 6rem;
+`
+
+S.Main = styled.main`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--color-purple0);
 `

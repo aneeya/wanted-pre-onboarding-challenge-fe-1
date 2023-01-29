@@ -1,52 +1,38 @@
-import { useRef, useState } from "react"
+import { useState } from "react"
 import styled from "styled-components"
 import useConfirmModal from "../../hooks/Confirm_modal"
 import { useRegisterTodo } from "../../hooks/Todo_query"
-import Button from "../common/Button"
-import HiddenButton from "../common/HiddenButton"
+import { ContainBT, OutlineBT } from "../../styles/buttonStyles"
 
 const init = {title: '', content: ''}
 
-export default function RegisterTodo() {
+export default function CreateTodo() {
   const [ todoInput, setTodoInput ] = useState(init)
-  const todoMutation = useRegisterTodo(todoInput!, () => setTodoInput(init))
-  const [ setConfirm, toggleConfirm ] = useConfirmModal({
+  const { setConfirm, toggleConfirm } = useConfirmModal({
     text: "등록을 완료 하시겠습니까?",
     ok: confirmTodoValue
   })
 
-  const buttonRef = useRef(null)
+  const todoMutation = useRegisterTodo(todoInput!, toggleConfirm)
 
   const changeTodoValue = (e: React.ChangeEvent) => {
     const { name, value } = e.target as HTMLInputElement | HTMLTextAreaElement
     setTodoInput({ ...todoInput!, [name]: value})
   }
-
-  const submitTodoValue = (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (e.target.keyCode === 13) return false
-    todoMutation.mutate()
-  }
-    
+   
   function confirmTodoValue() {
-    const hiddenButton = buttonRef.current! as HTMLButtonElement
-    hiddenButton.click()
+    todoMutation.mutate()
   }
 
   return(
     <>
       {setConfirm}
-      <S.Form onSubmit={submitTodoValue}>
-        <S.Buttons>
-          <Button 
-            text="등록" 
-            type="button"  
-            color="var(--color-purple2)"
-            size="small"
-            onClick={toggleConfirm as () => void}/>
-          <Button text="리셋" type="reset" color="var(--color-purple0)" size="small"/>
-          <HiddenButton a="hidden" ref={buttonRef} />
-        </S.Buttons>
+      <S.Form>
+        <S.DecoLayout>
+          <S.DecoDot/>
+          <S.DecoDot/>
+          <S.DecoDot/>
+        </S.DecoLayout>
         <S.InputLayout>
           <S.Label htmlFor="title">title</S.Label>
           <S.Input
@@ -65,6 +51,10 @@ export default function RegisterTodo() {
             value={todoInput.content}
             onChange={changeTodoValue}></S.TextArea>
         </S.TextLayout>
+        <S.Buttons>
+          <ContainBT type="button" theme="small" onClick={toggleConfirm}>등록</ContainBT>
+          <OutlineBT type="reset" theme="small">리셋</OutlineBT>
+        </S.Buttons>
       </S.Form>
     </>
   )
@@ -75,13 +65,36 @@ export default function RegisterTodo() {
 const S: any = {}
 
 S.Form = styled.form`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 38rem;
+  width: 62rem;
   height: 45rem;
-  margin-right: 2rem;
-  border: 2px solid var(--color-gray-purple1);
+  padding: 4rem 0 4rem 5rem;
+  border: 2px solid var(--color-purple3);
+  box-shadow: 6px 6px var(--color-gray-purple1);
+`
+
+S.DecoLayout = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 5.5rem;
+  height: 90%;
+  padding: 3rem 0;
+  border-right: 2px solid var(--color-gray-purple1);
+  transform: translateY(-50%);
+`
+S.DecoDot = styled.span`
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: var(--color-purple3);
 `
 
 S.InputLayout = styled.div`
@@ -89,7 +102,7 @@ S.InputLayout = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  width: 28rem;
+  width: 35rem;
   margin-bottom: 2rem;
 `
 
@@ -98,7 +111,7 @@ S.Label = styled.label`
   font-weight: 600;
 `
 S.Input = styled.input`
-  width: 28rem;
+  width: 100%;
   height: 4rem;
   margin-top: 0.5rem;
   border: none;
@@ -122,7 +135,7 @@ S.Buttons = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  width: 18rem;
+  width: 16rem;
   height: 5rem;
-  margin: 2rem 0 2rem 8rem;
+  font-size: 1.4rem;
 `

@@ -1,5 +1,5 @@
 import LoginUser from "../../components/form/LoginUser";
-import AuthLayout from "../../components/layout/user/AuthLayout";
+import AuthLayout from "../../components/layout/AuthLayout";
 
 export default function LoginPage() {
   const storedToken = window.localStorage.getItem('token')

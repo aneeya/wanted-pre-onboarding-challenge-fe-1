@@ -28,8 +28,8 @@ S.Layout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 30rem;
-  height: 32rem;
+  width: 42rem;
+  height: 25rem;
   padding: 3rem;
   background: var(--color-purple0);
   border: 2px solid var(--color-gray-purple1);
@@ -42,8 +42,8 @@ S.H2 = styled.h2`
   color: var(--color-purple3);
 `
 S.P = styled.p`
-  width: 24rem;
-  height: 26rem;
+  width: 35rem;
+  height: 14rem;
   padding: 1rem;
   border: 1px solid var(--color-gray-purple1);
   border-radius: 0.5rem;

@@ -6,6 +6,7 @@ import MainPage from "../pages/MainPage";
 import MainPageHeader from "../pages/MainPageHeader";
 import TodoListDetailPage from "../pages/todo/TodoListDetailPage";
 import TodoListPage from "../pages/todo/TodoListPage";
+import TodoAddPage from "../pages/todo/TodoAddPage";
 
 export default function Router() {
   
@@ -19,6 +20,7 @@ export default function Router() {
           <Route path="/todos" element={<TodoListPage/>}>
             <Route path=":id" element={<TodoListDetailPage/>}/>
           </Route>
+          <Route path="/create" element={<TodoAddPage/>}/>
           <Route path="/servererror" element={<ServerErrorPage/>}/>
         </Route>
       </Routes>

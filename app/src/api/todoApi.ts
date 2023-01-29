@@ -6,7 +6,7 @@ const baseURL = 'http://localhost:8080/todos'
 
 export const getTodos = async() => {
   const res = await axios.get(baseURL)
-  return res.data
+  return res.data.data
 }
 
 //todo 등록하기

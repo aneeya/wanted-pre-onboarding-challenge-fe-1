@@ -20,7 +20,7 @@ export default function useConfirmModal({text, ok}: Prop) {
     setIsOpen(!isOpen)
   }
 
-  return [setConfirm, toggleConfirm] 
+  return { setConfirm, toggleConfirm }
 }
 
 

@@ -1,18 +1,18 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import Button from "../../components/common/Button"
 import NoticeMesseage from "../../components/common/NoticeMesseage"
 import UpdateTodo from "../../components/form/UpdateTodo"
-import TodoItemDetail from "../../components/layout/todo/TodoItemDetail"
+import TodoItemDetail from "../../components/features/todo/TodoItemDetail"
 import useConfirmModal from "../../hooks/Confirm_modal"
 import { useGetTodoItem } from "../../hooks/Todo_query"
+import { OutlineBT } from "../../styles/buttonStyles"
 import imgIcon from "../../styles/imgSource"
 
 export default function TodoListDetailPage() {
   const [ editMode, setEditMode ] = useState(false)
   const nav = useNavigate()
-  const [ setConfirm, toggleConfirm ] = useConfirmModal({
+  const { setConfirm, toggleConfirm } = useConfirmModal({
     text: "상세보기를 닫으시겠습니까?",
     ok: () => nav('/todos')
   })
@@ -26,27 +26,22 @@ export default function TodoListDetailPage() {
   return(
     <>
       {setConfirm}
-      <S.Layout>
-      { !editMode 
-        ?
-        <>
-          <S.CloseButton type="button" onClick={toggleConfirm}>
-            <S.CloseIcon src={imgIcon.deleteIcon} />
-          </S.CloseButton>
-          <S.ButtonLayout>
-            <Button
-              text="edit"
-              type="button"
-              size="small"
-              color="var(--color-purple0)"
-              onClick={() => setEditMode(true)}/>
-          </S.ButtonLayout>
-          <TodoItemDetail todo={selectedTodo} />
-        </>
-        :
-          <UpdateTodo closeAction={() => setEditMode(false)} todo={selectedTodo} />
-      }
-      </S.Layout>
+        <S.Layout>
+          { !editMode
+            ?
+            <>
+              <S.CloseButton type="button" onClick={toggleConfirm}>
+                <S.CloseIcon src={imgIcon.deleteIcon} />
+              </S.CloseButton>
+              <S.ButtonLayout>
+                <OutlineBT type="button" theme="small" onClick={() => setEditMode(true)}>edit</OutlineBT>
+              </S.ButtonLayout>
+              <TodoItemDetail todo={selectedTodo} />
+            </>
+            :
+              <UpdateTodo closeAction={() => setEditMode(false)} todo={selectedTodo} />
+          }
+        </S.Layout>
     </>
   )
 }
@@ -55,18 +50,20 @@ export default function TodoListDetailPage() {
 
 const S: any = {}
 
-S.Layout = styled.section`
+S.Layout = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 38rem;
-  height: 50rem;
+  width: 50rem;
+  height: 40rem;
+  margin-left: 5rem;
   border: 2px solid var(--color-gray-purple1);
-  background: url(${imgIcon.paper}) top center / 35rem;
+  background: var(--color-white) url(${imgIcon.paper}) top center / 35rem;
 `
 S.ButtonLayout = styled.div`
-  margin: 7rem 0 2rem 22rem;
+  margin: 5rem 0 2rem 28rem;
+  font-size: 1.4rem;
 `
 
 S.CloseButton = styled.button`

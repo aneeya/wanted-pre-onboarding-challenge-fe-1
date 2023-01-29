@@ -1,17 +1,11 @@
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import { ContainBT } from "../../../styles/buttonStyles"
 import imgIcon from "../../../styles/imgSource"
 import { longinMove } from "../../../styles/styleAnimation"
-import { loginStateButton } from "../../../styles/styleProps"
-import Button from "../../common/Button"
 
 export default function HeaderLogout() {
   const nav = useNavigate()
-
-  const buttonStyle = { ...loginStateButton, 
-    text: "login",
-    color: "var(--color-yellow)",
-    onClick:  () => nav('/login')}
 
   return(
     <>
@@ -19,7 +13,7 @@ export default function HeaderLogout() {
         <S.IconLayout>
           <S.LogoutIcon/>
         </S.IconLayout>
-        <Button {...buttonStyle}/>
+        <ContainBT type="button" theme="small" onClick={() => nav('/login')}>login</ContainBT>
       </S.Layout>
     </>
   )
@@ -32,6 +26,9 @@ const S: any = {}
 S.Layout = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 18rem;
+  font-size: 1.4rem;
 `
 
 S.IconLayout = styled.div`
@@ -40,7 +37,6 @@ S.IconLayout = styled.div`
   justify-content: start;
   width: 10rem;
   height: 5rem;
-  margin-right:1rem;
   border-radius: 25% / 50%;
   border: 2px solid var(--color-purple3);
   font-size: 1.4rem;

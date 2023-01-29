@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { PremiumBT } from "../../../styles/buttonStyles";
 import { gotojoinText } from "../../../styles/styleAnimation";
 
 export default function MainLogined() {
@@ -8,7 +9,7 @@ export default function MainLogined() {
         <S.Text>
           TODO 👇
         </S.Text>
-        <S.Link>
+        <S.Link as='div' theme='large'>
           <Link to={'/todos'}>Go</Link>
         </S.Link>
     </>
@@ -30,18 +31,6 @@ S.Text = styled.div`
   animation: ${gotojoinText} 0.8s 8 alternate ease-in;
 `
 
-S.Link = styled.div`
-width: 16rem;
-height: 6rem;
-border-radius: 3rem;
-margin-left: 1rem;
-background: var(--color-green0);
-font-size: 2rem;
-font-weight: 800;
-font-family: var(--font-korea);
-color: var(--color-white);
-&:hover,
-&:focus {
-  background: var(--color-green1);
-}
+S.Link = styled(PremiumBT)`
+  font-size: 2.2rem;
 `

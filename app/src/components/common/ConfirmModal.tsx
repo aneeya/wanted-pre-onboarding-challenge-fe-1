@@ -1,7 +1,6 @@
 import styled from "styled-components"
+import { ContainBT, OutlineBT } from "../../styles/buttonStyles"
 import imgIcon from "../../styles/imgSource"
-import { cancelButton, joinButton } from "../../styles/styleProps"
-import Button from "./Button"
 
 interface Prop {
   text: string
@@ -10,16 +9,6 @@ interface Prop {
 }
 
 export default function Confirm({text, ok, cancel}: Prop) {
-  const joinButtonStyle = { ...joinButton,
-    text: 'yes',
-    onClick: ok,
-    size: 'small'
-  }
-
-  const cancelButtonStyle = { ...cancelButton,
-    onClick: cancel,
-    size: 'small'
-  } 
 
   return(
     <>
@@ -30,8 +19,8 @@ export default function Confirm({text, ok, cancel}: Prop) {
             {text}
           </S.ConfirmContent>
           <S.Buttons>
-            <Button {...joinButtonStyle} />
-            <Button {...cancelButtonStyle} />
+            <ContainBT type="button" theme="small" onClick={ok}>yes</ContainBT>
+            <OutlineBT type="button" theme="small" onClick={cancel}>cancel</OutlineBT>
           </S.Buttons>
         </S.Layout>
       </S.Background>
@@ -83,7 +72,8 @@ S.Buttons = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  width: 18rem;
+  width: 17rem;
   height: 6rem;
   margin-top: 2rem;
+  font-size: 1.4rem;
 `

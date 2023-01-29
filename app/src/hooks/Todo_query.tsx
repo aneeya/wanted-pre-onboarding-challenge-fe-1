@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { deleteTodo, getTodos, postTodo, updateTodo } from "../api/todoApi";
 import { Todo, TodoInput } from "../types/todolistType";
 
@@ -28,7 +28,7 @@ export function useGetTodoItem() {
   const { status, data } =  useQuery(['@todos', paramId], getTodos, {
     onSuccess: (data) => {
       query.setQueryData(['@todos', paramId], () => {
-        return data.data.filter((todo: Todo) => todo.id === paramId) 
+        return data.filter((todo: Todo) => todo.id === paramId) 
       })
     },
     onError: (e: AxiosError) => {
@@ -49,11 +49,13 @@ export function useGetTodoItem() {
 
 export function useRegisterTodo(newTodo: TodoInput, result: () => void) {
   const query = useQueryClient()
+  const nav = useNavigate()
 
   return useMutation(() => postTodo(newTodo), {
     onSuccess: () => {
       query.invalidateQueries(['@todos'])
       result()
+      nav('/todos')
     },
     onError: (e: AxiosError) => {
       const message = e.response?.data as {details: string}

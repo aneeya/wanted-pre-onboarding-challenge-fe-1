@@ -2,7 +2,7 @@ import { keyframes } from "styled-components";
 
 export const longinMove = keyframes`
   0% {
-    margin-left: 0.3rem;
+    margin-left: 1rem;
     background-color: var(--color-red-orange);
     transform: rotate(0);
   }
