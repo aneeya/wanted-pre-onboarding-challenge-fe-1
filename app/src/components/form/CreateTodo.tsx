@@ -4,14 +4,14 @@ import styled from "styled-components"
 import useConfirmModal from "../../hooks/Confirm_modal"
 import { useRegisterTodo } from "../../hooks/Todo_query"
 import { ContainBT, OutlineBT } from "../../styles/buttonStyles"
-import { ConfrimCustom } from "../../types/todolistType"
 
 const init = {title: '', content: ''}
+const initConfirmType = {text: '', ok: () => {}}
 
 export default function CreateTodo() {
   const [ todoInput, setTodoInput ] = useState(init)
-  const [ confirmType, setConfirmType ] = useState(false)
-  const { setConfirm, toggleConfirm } = useConfirmModal(confirmState())
+  const [ confirmType, setConfirmType ] = useState(initConfirmType)
+  const { setConfirm, toggleConfirm } = useConfirmModal(confirmType)
 
   const nav = useNavigate()
   const todoMutation = useRegisterTodo(todoInput!, toggleConfirm)
@@ -21,25 +21,21 @@ export default function CreateTodo() {
     setTodoInput({ ...todoInput!, [name]: value})
   }
    
-  function confirmState(): ConfrimCustom  {
 
-    if(!confirmType) {
-      return {
+  const confrimOpen = (e: React.MouseEvent) => {
+    const target = e.target as HTMLButtonElement
+    if(target.innerText === '등록') {
+      setConfirmType({
         text: '등록을 완료 하시겠습니까?',
         ok: () => todoMutation.mutate()
-      } 
-    } else {
-      return {
+      })
+    }
+    else{ 
+      setConfirmType({
         text: '작성중인 내용이 지워집니다. 취소 하시겠습니까?',
         ok: () => nav('/todos')
-      }
+      })
     }
-  }
-
-  const confrimCreate = (e: React.MouseEvent) => {
-    const target = e.target as HTMLButtonElement
-    if(target.innerText === '등록') setConfirmType(false)
-    else setConfirmType(true)
     toggleConfirm()
   }
 
@@ -72,8 +68,8 @@ export default function CreateTodo() {
             onChange={changeTodoValue}></S.TextArea>
         </S.TextLayout>
         <S.Buttons>
-          <ContainBT type="button" theme="small" onClick={confrimCreate} className='createtodoBT'>등록</ContainBT>
-          <OutlineBT type="button" theme="small" onClick={confrimCreate} className='createtodoBT'>취소</OutlineBT>
+          <ContainBT type="button" theme="small" onClick={confrimOpen} className='createtodoBT'>등록</ContainBT>
+          <OutlineBT type="button" theme="small" onClick={confrimOpen} className='createtodoBT'>취소</OutlineBT>
         </S.Buttons>
       </S.Form>
     </>
