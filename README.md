@@ -2,13 +2,16 @@
 
 <a href="https://github.com/starkoora/wanted-pre-onboarding-challenge-fe-1-api#-%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-%EC%B1%8C%EB%A6%B0%EC%A7%80-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EC%BD%94%EC%8A%A4-%EC%82%AC%EC%A0%84%EA%B3%BC%EC%A0%9C-%EC%95%88%EB%82%B4--api">원티드 프리온보딩 챌린지 프론트엔드 코스 사전과제</a>
 
+<h1>
+ <img style="width: 300px;" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/dfdcbb161413651.63d65798ee3d4.png" alt=""/>
+</h1>
 ## 기능
  - 로그인
  - 회원가입
  - todo CRUD
  
  ### 로그인
- <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/76c215161413651.63c651fe055e3.gif" width="600px"/>
+ <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/31c2a2161413651.63d65798eef1d.gif" width="200px"/>
  
  ### 회원가입
  <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/bd62a5161413651.63c651fe037fc.gif" width="600px"/>
