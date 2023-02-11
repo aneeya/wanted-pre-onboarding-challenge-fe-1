@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import NoticeMesseage from "../../components/common/NoticeMesseage"
 import UpdateTodo from "../../components/form/UpdateTodo"
 import TodoItemDetail from "../../components/features/todo/TodoItemDetail"
 import useConfirmModal from "../../hooks/Confirm_modal"
@@ -18,10 +17,6 @@ export default function TodoListDetailPage() {
   })
 
   const selectedTodo = useGetTodoItem()
-
-  if( selectedTodo === undefined) {
-    return <NoticeMesseage text="해당 목록이 존재하지 않습니다" />
-  }
 
   return(
     <>

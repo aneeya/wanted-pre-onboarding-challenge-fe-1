@@ -3,10 +3,10 @@ import MainLogined from "../components/features/main/MainLogined"
 import MainLogout from "../components/features/main/MainLogout"
 import { ReactComponent as MainImg }  from "../assets/mainpage.svg"
 import { ReactComponent as Logo }  from "../assets/logo.svg"
+import { Token } from "../types/userManageType"
 
 
-export default function MainPage() {
-  const storedToken = window.localStorage.getItem('token')
+export default function MainPage({storedToken}: Token) {
 
   return(
     <S.Main>

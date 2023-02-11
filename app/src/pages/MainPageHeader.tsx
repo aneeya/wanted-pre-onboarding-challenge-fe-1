@@ -3,10 +3,10 @@ import styled from "styled-components";
 import HeaderLogined from "../components/features/header/HeaderLogined";
 import HeaderLogout from "../components/features/header/HeaderLogout";
 import imgIcon from "../styles/imgSource";
+import { Token } from "../types/userManageType";
 
 
-export default function MainPageHeader() {
-  const storedToken = window.localStorage.getItem('token')
+export default function MainPageHeader({storedToken}: Token) {
   
   return(
     <>
@@ -17,9 +17,7 @@ export default function MainPageHeader() {
               <S.HomeIcon alt="홈으로가기" src={imgIcon.homeIcon}/>
             </Link>
           </h1>
-          { storedToken  !== null ?
-            <HeaderLogined /> :
-            <HeaderLogout />
+          { storedToken !== null ? <HeaderLogined /> : <HeaderLogout />
           }
         </S.HeadLayout>
       </S.Header>

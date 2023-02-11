@@ -58,5 +58,9 @@ Auth.Buttons = styled.div`
   margin-top: 4rem;
   font-size: 1.6rem;
 `
-
+Auth.Error = styled.div`
+  color: var(--color-red-orange);
+  font-size: 1.6rem;
+  font-weight: 600;
+`
 export default Auth

@@ -7,3 +7,7 @@ export interface Join extends User{
   emailValidation: string
   passwordValidation: string
 }
+
+export type Token = {
+  storedToken: null | string
+}

@@ -2,14 +2,14 @@ import React, { useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 import useConfirmModal from "../../hooks/Confirm_modal";
 import { useJoinUser } from "../../hooks/User_query";
-import joinCondition, { initState } from "../../reducer/joinCondition";
+import joinCondition, { initState } from "../../utils/reducer/joinCondition";
 import { ContainBT, OutlineBT } from "../../styles/buttonStyles";
 import Auth from "../../styles/layout/authLayout";
-import { joinButtonActive } from "../../validatation/joinvaildate";
+import { joinButtonActive } from "../../utils/joinvaildate";
 
 export default function JoinUser() {
   const { setConfirm, toggleConfirm }  = useConfirmModal({
-    text: "회원가입을 완료 하시겠습니까?",
+    text: "가입을 완료 하시겠습니까?",
     ok: confirmUserInfo}) 
   const [ state, dispatch ] = useReducer(joinCondition, initState)
   const { email, password, emailValidation, passwordValidation } = state

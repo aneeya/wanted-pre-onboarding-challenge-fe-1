@@ -1,5 +1,5 @@
-import { Join } from "../types/userManageType"
-import { vaildateEmail, vaildatePassword } from "../validatation/joinvaildate"
+import { Join } from "../../types/userManageType"
+import { vaildateEmail, vaildatePassword } from "../joinvaildate"
 
 export const initState = { 
   email: '', 
