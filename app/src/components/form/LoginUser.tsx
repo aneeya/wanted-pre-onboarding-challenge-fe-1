@@ -5,6 +5,7 @@ import joinCondition, { initState } from "../../utils/reducer/joinCondition";
 import { ContainBT, OutlineBT } from "../../styles/buttonStyles";
 import Auth from "../../styles/layout/authLayout";
 import { joinButtonActive } from "../../utils/joinvaildate";
+import { ResMessage } from "../../types/userManageType";
 
 export default function LoginUser() {
   const [ state, dispatch ] = useReducer(joinCondition, initState)
@@ -22,6 +23,14 @@ export default function LoginUser() {
     e.preventDefault()
     loginMutation.mutate()
     
+  }
+
+  const loginError = () =>{
+    const isError = loginMutation.isError
+    const errorMessage = isError ? 
+      (loginMutation.error.response?.data as ResMessage).details 
+      :  null
+    return {isError, errorMessage}
   }
 
   useEffect(() => {
@@ -50,7 +59,7 @@ export default function LoginUser() {
         <Auth.Input type="password" name="password" id="password"  color={passwordValidation} required onChange={chagneLoginUser}/>
         <Auth.ValidateState>{passwordValidation}</Auth.ValidateState>
       </Auth.InputLayout>
-      <Auth.Error className="error-messeage">{loginMutation.isError && "잘못된 아이디 및 패스워드 입니다."}</Auth.Error>
+      <Auth.Error className="error-messeage">{loginError().isError && loginError().errorMessage}</Auth.Error>
       <Auth.Buttons>
         <ContainBT type="submit" theme="medium" disabled={joinButtonActive(state)}>login</ContainBT>
         <OutlineBT type="button" theme="medium" onClick={() => nav('/')}>cancel</OutlineBT>

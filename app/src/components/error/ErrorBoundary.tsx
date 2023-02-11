@@ -1,6 +1,7 @@
 import { AxiosError } from "axios";
 import { Component, ErrorInfo, ReactNode } from "react";
 import JoinError from "./JoinError";
+import MissedToken from "./missedToken";
 import NotFound from "./NotFound";
 import SomthingWrong from "./SomethingWrong";
 
@@ -39,6 +40,7 @@ class ErrorBoundary extends Component<Props, State> {
       if(status === 500 || status === 503) return <SomthingWrong/>
       if(status === 400 || status === 404) return <NotFound/>
       if(status === 409) return <JoinError messeage={data.details}/>
+      if(data.details === 'Token is missing') return <MissedToken/>
     }
     return this.props.children;
   }

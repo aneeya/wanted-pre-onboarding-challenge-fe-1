@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ErrorBoundary from './components/error/ErrorBoundary';
+import GlobalStyle from './styles/GlobalStyle';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -22,6 +23,8 @@ const queryClient = new QueryClient({
 }});
 
 root.render(
+  <>
+  <GlobalStyle />
   <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
       <React.StrictMode>
@@ -29,6 +32,7 @@ root.render(
       </React.StrictMode>
     </QueryClientProvider>
   </ErrorBoundary>
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function

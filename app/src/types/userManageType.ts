@@ -11,3 +11,7 @@ export interface Join extends User{
 export type Token = {
   storedToken: null | string
 }
+
+export type ResMessage = {
+  details: string
+}
